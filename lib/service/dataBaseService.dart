@@ -8,10 +8,10 @@ class DataBaseService {
   final CollectionReference planulaReferense = FirebaseFirestore.instance.collection('Planulas');
 
   //add Planula element to collection
-  Future addPlanula(String url, String email, String description, DateTime dateTime, bool access) async {
-    return await planulaReferense.doc(FirebaseAuth.instance.currentUser!.email).collection('planulas').add({
+  Future addPlanula(String url, String userId, String description, DateTime dateTime, bool access) async {
+    return await planulaReferense.add({
       'url': url,
-      'email': email,
+      'userId': userId,
       'description': description,
       'datetime': dateTime,
       'access' : access
@@ -23,7 +23,7 @@ class DataBaseService {
     return snapshot.docs.map((doc) {
         return Planula(
           url: doc.get('url'),
-          email: doc.get('email'),
+          userId: doc.get('userId'),
           description: doc.get('description'),
           dateTime: doc.get('datetime').toDate(),
           access: doc.get('access'),
@@ -32,7 +32,7 @@ class DataBaseService {
   }
 
   Stream<List<Planula?>> get planulas {
-    return planulaReferense.doc(FirebaseAuth.instance.currentUser!.email).collection('planulas').snapshots().
+    return planulaReferense.snapshots().
     map(_listPlanulas);
   }
 }

@@ -20,12 +20,17 @@ class _PlanulaListProviderState extends State<PlanulaListProvider> {
     final planulas = Provider.of<List<Planula?>?>(context);
 
     return ListView.builder(
-      itemCount: planulas!.length,
-        itemBuilder: (context, int) {
+      itemCount: planulas!.length ,
+        itemBuilder: (context, i) {
+        if (planulas[i]!.userId.toString() == FirebaseAuth.instance.currentUser!.uid)
+        {
           return LinkPreviewerAad(
-            link: planulas[int]!.url,
+            link: planulas[i]!.url,
             direction: ContentDirection.horizontal,
           );
+        } else {
+          return SizedBox(height: 0,);
+        }
         }
     );
 

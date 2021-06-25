@@ -77,7 +77,7 @@ class _PlanulasListState extends State<PlanulasList> {
                             ElevatedButton(
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()){
-                                    dynamic result = await DataBaseService().addPlanula(url, user!.email!, description, DateTime.now(), access);
+                                    dynamic result = await DataBaseService().addPlanula(url, user!.uid, description, DateTime.now(), access);
                                     if(result == null) {
                                       setState(() {
                                         error = "please chek your URL";
