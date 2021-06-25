@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "878072130284",
+    "project_id": "meduzaflutter",
+    "storage_bucket": "meduzaflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878072130284:android:cef8faf76aecf5eafd93c9",
+        "android_client_info": {
+          "package_name": "com.example.meduza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878072130284-bm6c2c0274n7cv6neo8kve9v257ip5h4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVTictmJj_8VUHvZymwvfz7qL9SD0ugWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878072130284-bm6c2c0274n7cv6neo8kve9v257ip5h4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
