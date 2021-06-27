@@ -21,34 +21,38 @@ class _DialogListProviderState extends State<DialogListProvider> {
     return ListView.builder(
         itemCount: dialogs!.length ,
         itemBuilder: (dialogcontext, i) {
-          if (dialogs[i]!.users.containsValue(FirebaseAuth.instance.currentUser!.email))
-          {
-            if (dialogs[i]!.users["1"] == FirebaseAuth.instance.currentUser!.email){
-              return ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        dialogcontext,
-                        MaterialPageRoute(
-                          builder: (dialogcontext) => ChatPage(dialogId: dialogs[i]!.docId),
-                        ));
-                  },
-                  child: Text(dialogs[i]!.users["2"])
-              );
-
-            } else {
-              return ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        dialogcontext,
-                        MaterialPageRoute(
-                            builder: (dialogcontext) => ChatPage(dialogId: dialogs[i]!.docId),
-                        ));
-                  },
-                  child: Text(dialogs[i]!.users["1"])
-              );
-            }
+          if (dialogs.isEmpty) {
+            return Text("Loading");
           } else {
-            return SizedBox(height: 0,);
+            if (dialogs[i]!.users.containsValue(FirebaseAuth.instance.currentUser!.email))
+            {
+              if (dialogs[i]!.users["1"] == FirebaseAuth.instance.currentUser!.email){
+                return ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          dialogcontext,
+                          MaterialPageRoute(
+                            builder: (dialogcontext) => ChatPage(dialogId: dialogs[i]!.docId),
+                          ));
+                    },
+                    child: Text(dialogs[i]!.users["2"])
+                );
+
+              } else {
+                return ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          dialogcontext,
+                          MaterialPageRoute(
+                            builder: (dialogcontext) => ChatPage(dialogId: dialogs[i]!.docId),
+                          ));
+                    },
+                    child: Text(dialogs[i]!.users["1"])
+                );
+              }
+            } else {
+              return SizedBox(height: 0,);
+            }
           }
           //return Text(dialogs[i]!.users.toString());
         }

@@ -70,18 +70,16 @@ class DataBaseServiceDialogs {
 }
 
 class DataBaseServiceMessages {
-  DataBaseServiceMessages({required this.dialogId});
 
-  late String dialogId;
-
-  final CollectionReference messagesReference = FirebaseFirestore.instance.collection('Dialogs');
+  final CollectionReference messagesReference = FirebaseFirestore.instance.collection('Messages');
 
   //add message
-  Future createMessageDocument(String user, String text, DateTime time) async{
-    return await messagesReference.doc(dialogId).collection('Messages').add({
+  Future createMessageDocument(String user, String text, DateTime time, String dialogId) async{
+    return await messagesReference.add({
       'user': user,
       'text' : text,
-      'time' : time
+      'time' : time,
+      'dialogId' : dialogId
     });
   }
 
@@ -91,13 +89,14 @@ class DataBaseServiceMessages {
       return MessageModel(
           user: doc.get('user'),
           text: doc.get('text'),
-          time: doc.get('time'),
+          time: doc.get('time').toDate(),
+          dialogId: doc.get('dialogId')
       );
     }).toList();
   }
 
-  Stream<List<MeduzaDialog?>?> get messages {
-    return messagesReference.doc(dialogId).collection('Messages').snapshots().
+  Stream<List<MessageModel?>> get messages {
+    return messagesReference.orderBy('time', descending: true).snapshots().
     map(_listMessages);
   }
 

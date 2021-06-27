@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meduza/models/messageModel.dart';
 import 'package:meduza/models/planulaModel.dart';
 import 'package:meduza/screen/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,7 +22,10 @@ void main() async{
       ),
       StreamProvider<List<MeduzaDialog?>?>(initialData: null,
         create: (context) => DataBaseServiceDialogs().dialogs,
-      )
+      ),
+      StreamProvider<List<MessageModel?>?>(initialData: null,
+        create: (context) => DataBaseServiceMessages().messages,
+      ),
     ],
     child: MyApp(),
     ),
