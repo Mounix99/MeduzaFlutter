@@ -66,7 +66,6 @@ class _PlanulasListState extends State<PlanulasList> {
                             TextFormField(
                               decoration: textInputDecoration.copyWith(hintText: 'Description'),
                               validator: (val) => val!.isEmpty? "Enter Description" : null,
-                              obscureText: true,
                               onChanged: (val) {
                                 setState(() {
                                   description = val;
@@ -77,15 +76,16 @@ class _PlanulasListState extends State<PlanulasList> {
                             ElevatedButton(
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()){
-                                    dynamic result = await DataBaseService().addPlanula(url, user!.uid, description, DateTime.now(), access);
+                                    dynamic result = await DataBaseServicePlanula().addPlanula(url, user!.uid, description, DateTime.now(), access);
                                     if(result == null) {
                                       setState(() {
                                         error = "please chek your URL";
                                       });
                                     }
                                   }
+                                  Navigator.pop(context, 'OK');
                                 },
-                            child: Text(
+                              child: Text(
                               "Add",
                             )),]))
                     ],

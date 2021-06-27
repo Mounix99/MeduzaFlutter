@@ -6,6 +6,7 @@ import 'package:meduza/service/authService.dart';
 import 'package:meduza/service/dataBaseService.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'models/dialogsModel.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,10 @@ void main() async{
       initialData: null,
         create: (context) => AuthService().user,),
       StreamProvider<List<Planula?>?>(initialData: null,
-        create: (context) => DataBaseService().planulas,
+        create: (context) => DataBaseServicePlanula().planulas,
+      ),
+      StreamProvider<List<MeduzaDialog?>?>(initialData: null,
+        create: (context) => DataBaseServiceDialogs().dialogs,
       )
     ],
     child: MyApp(),

@@ -33,7 +33,5 @@ class _PlanulaListProviderState extends State<PlanulaListProvider> {
         }
         }
     );
-
-    return Container();
   }
 }
