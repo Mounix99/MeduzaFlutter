@@ -35,7 +35,7 @@ class DataBaseServicePlanula {
 
   //stream for Multiprovider planulalist
   Stream<List<Planula?>> get planulas {
-    return planulaReferense.snapshots().
+    return planulaReferense.orderBy('datetime', descending: true).snapshots().
     map(_listPlanulas);
   }
 }

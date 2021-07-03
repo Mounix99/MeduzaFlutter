@@ -35,7 +35,16 @@ class _DialogListProviderState extends State<DialogListProvider> {
                             builder: (dialogcontext) => ChatPage(dialogId: dialogs[i]!.docId),
                           ));
                     },
-                    child: Text(dialogs[i]!.users["2"])
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(backgroundImage: NetworkImage("https://im0-tub-ua.yandex.net/i?id=7d228c3afb56ba2835217d16d5d62bd2&n=13"),),
+                          SizedBox(width: 5,),
+                          Text(dialogs[i]!.users["2"]),
+                        ],
+                      ),
+                    )
                 );
 
               } else {
@@ -47,7 +56,16 @@ class _DialogListProviderState extends State<DialogListProvider> {
                             builder: (dialogcontext) => ChatPage(dialogId: dialogs[i]!.docId),
                           ));
                     },
-                    child: Text(dialogs[i]!.users["1"])
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL ?? "https://im0-tub-ua.yandex.net/i?id=7d228c3afb56ba2835217d16d5d62bd2&n=13"),),
+                          SizedBox(width: 5,),
+                          Text(dialogs[i]!.users["1"]),
+                        ],
+                      ),
+                    )
                 );
               }
             } else {

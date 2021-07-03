@@ -19,7 +19,7 @@ class _PlanulasListState extends State<PlanulasList> {
   User? user = FirebaseAuth.instance.currentUser;
   String description = '';
   String url = '';
-  bool access = false;
+  bool _value = false;
   String error = '';
 
 
@@ -73,21 +73,43 @@ class _PlanulasListState extends State<PlanulasList> {
                               },
                             ),
                             SizedBox(height: 20),
-                            ElevatedButton(
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()){
-                                    dynamic result = await DataBaseServicePlanula().addPlanula(url, user!.uid, description, DateTime.now(), access);
-                                    if(result == null) {
-                                      setState(() {
-                                        error = "please chek your URL";
-                                      });
-                                    }
-                                  }
-                                  Navigator.pop(context, 'OK');
-                                },
-                              child: Text(
-                              "Add",
-                            )),]))
+                              SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  ElevatedButton(
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()){
+                                          dynamic result = await DataBaseServicePlanula().addPlanula(url, user!.uid, description, DateTime.now(), _value);
+                                          if(result == null) {
+                                            setState(() {
+                                              error = "please chek your URL";
+                                            });
+                                          }
+                                        }
+                                        Navigator.pop(context, 'OK');
+                                      },
+                                      child: Text(
+                                        "Add as private",
+                                      )),
+                                  ElevatedButton(
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()){
+                                          dynamic result = await DataBaseServicePlanula().addPlanula(url, user!.uid, description, DateTime.now(), _value);
+                                          if(result == null) {
+                                            setState(() {
+                                              error = "please chek your URL";
+                                            });
+                                          }
+                                        }
+                                        Navigator.pop(context, 'OK');
+                                      },
+                                      child: Text(
+                                        "Add as public",
+                                      )),
+                                ],
+                              )
+                              ]))
                     ],
                   ),
                 ),

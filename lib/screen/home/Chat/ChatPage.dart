@@ -38,7 +38,7 @@ class _ChatPageState extends State<ChatPage> {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(width: 1,),
+                        SizedBox(width: 100,),
                         Flexible(
                           child: Card(
                             child: ElevatedButton(
@@ -47,8 +47,14 @@ class _ChatPageState extends State<ChatPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  CircleAvatar(backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL ?? ""),),
-                                  TextButton(onPressed: () {}, child: Text(messages[i]!.user, style: TextStyle(color: Colors.white),)),
+                                  TextButton(onPressed: () {}, child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      CircleAvatar(backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL ?? "https://im0-tub-ua.yandex.net/i?id=7d228c3afb56ba2835217d16d5d62bd2&n=13"),),
+                                      SizedBox(width: 5,),
+                                      Text(messages[i]!.user, style: TextStyle(color: Colors.white),),
+                                    ],
+                                  )),
                                   Text(messages[i]!.text),
                                   Text(messages[i]!.time.toLocal().toString().substring(0,16), style: TextStyle(fontSize: 10),),
                                 ],
@@ -70,7 +76,13 @@ class _ChatPageState extends State<ChatPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  TextButton(onPressed: () {}, child: Text(messages[i]!.user, style: TextStyle(color: Colors.white),)),
+                                  TextButton(onPressed: () {}, child: Row(
+                                    children: [
+                                      CircleAvatar(backgroundImage: NetworkImage("https://im0-tub-ua.yandex.net/i?id=7d228c3afb56ba2835217d16d5d62bd2&n=13"),),
+                                      SizedBox(width: 5,),
+                                      Text(messages[i]!.user, style: TextStyle(color: Colors.white),)
+                                    ],
+                                  )),
                                   Text(messages[i]!.text),
                                   Text(messages[i]!.time.toLocal().toString().substring(0,16), style: TextStyle(fontSize: 10),),
                                 ],
@@ -78,7 +90,7 @@ class _ChatPageState extends State<ChatPage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 1,),
+                        SizedBox(width: 100,),
                       ],
                     );
                   }

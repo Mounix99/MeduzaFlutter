@@ -62,4 +62,35 @@
       }
     }
 
+    //user photo update
+    Future userPhotoUpdate(String url) async {
+      try{
+        User user = _auth.currentUser!;
+        return await user.updatePhotoURL(url);
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+
+    //user displayName
+  Future userDisplayNameUpdate(String NickName) async{
+      try{
+        User user = _auth.currentUser!;
+        return await user.updateDisplayName(NickName);
+      } catch (e) {
+        print(e.toString());
+      }
+  }
+
+  //user delete function
+  Future userDelete() async {
+    try {
+      await FirebaseAuth.instance.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        print('The user must reauthenticate before this operation can be executed.');
+      }
+    }
+  }
+
   }
