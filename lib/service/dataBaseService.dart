@@ -7,11 +7,11 @@ import 'package:meduza/models/planulaModel.dart';
 
 class DataBaseServicePlanula {
 
-  final CollectionReference planulaReferense = FirebaseFirestore.instance.collection('Planulas');
+  final CollectionReference planulaReference = FirebaseFirestore.instance.collection('Planulas');
 
   //add Planula element to collection
   Future addPlanula(String url, String userId, String description, DateTime dateTime, bool access) async {
-    return await planulaReferense.add({
+    return await planulaReference.add({
       'url': url,
       'userId': userId,
       'description': description,
@@ -29,14 +29,19 @@ class DataBaseServicePlanula {
           description: doc.get('description'),
           dateTime: doc.get('datetime').toDate(),
           access: doc.get('access'),
+          docId: doc.id
         );
     }).toList();
   }
 
   //stream for Multiprovider planulalist
   Stream<List<Planula?>> get planulas {
-    return planulaReferense.orderBy('datetime', descending: true).snapshots().
+    return planulaReference.orderBy('datetime', descending: true).snapshots().
     map(_listPlanulas);
+  }
+
+  Future deletePlanula(String docId) async {
+    planulaReference.doc(docId).delete();
   }
 }
 
@@ -67,6 +72,10 @@ class DataBaseServiceDialogs {
     map(_listDialog);
   }
 
+  Future deleteDialog(String docId) async {
+    dialogReference.doc(docId).delete();
+  }
+
 }
 
 class DataBaseServiceMessages {
@@ -90,7 +99,8 @@ class DataBaseServiceMessages {
           user: doc.get('user'),
           text: doc.get('text'),
           time: doc.get('time').toDate(),
-          dialogId: doc.get('dialogId')
+          dialogId: doc.get('dialogId'),
+          docId: doc.id
       );
     }).toList();
   }
@@ -98,6 +108,10 @@ class DataBaseServiceMessages {
   Stream<List<MessageModel?>> get messages {
     return messagesReference.orderBy('time', descending: true).snapshots().
     map(_listMessages);
+  }
+
+  Future deleteMessage(String docId) async {
+    messagesReference.doc(docId).delete();
   }
 
 }

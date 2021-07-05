@@ -20,7 +20,8 @@ class SideDrawer extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          CircleAvatar(backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL ?? "https://im0-tub-ua.yandex.net/i?id=7d228c3afb56ba2835217d16d5d62bd2&n=13"),),
+                          CircleAvatar(backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL ?? "https://im0-tub-ua.yandex.net/i?id=7d228c3afb56ba2835217d16d5d62bd2&n=13"),
+                          radius: 25,),
                           SizedBox(width: 10,),
                           Text(FirebaseAuth.instance.currentUser!.displayName != null ? FirebaseAuth.instance.currentUser!.displayName! : FirebaseAuth.instance.currentUser!.email!,
                           style: TextStyle(fontSize: 25),)

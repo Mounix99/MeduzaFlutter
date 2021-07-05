@@ -1,4 +1,5 @@
 import 'package:meduza/models/planulaModel.dart';
+import 'package:meduza/service/dataBaseService.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -25,25 +26,39 @@ class _PlanulaListProviderState extends State<PlanulaListProvider> {
         itemBuilder: (context, i) {
             if (planulas![i]!.userId.toString() == FirebaseAuth.instance.currentUser!.uid)
             {
-              return Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: TextButton(
-                  onPressed: () async{
-                    // await launch(
-                    //     planulas[i]!.url,
-                    //     forceSafariVC: true,
-                    //     forceWebView: true,
-                    //     enableJavaScript: true,
-                    // );
-                  },
-                  child: LinkPreviewerAad(
-                    link: planulas[i]!.url,
-                    direction: ContentDirection.horizontal,
-                    borderColor: Colors.blue,
-                    borderRadius: 30,
-                    showBody: true,
-                    bodyTextOverflow: TextOverflow.fade,
-                    defaultPlaceholderColor: Colors.blue,
+              return Dismissible(
+                key: UniqueKey(),
+                onDismissed: (direction) {
+                  // Remove the item from the data source.
+                  setState(() {
+                    DataBaseServicePlanula().deletePlanula(planulas[i]!.docId);
+                    print(planulas[i]!.docId.toString());
+                  });
+                  // Then show a snackbar.
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('Planula has been deleted')));
+                },
+                background: Container(color: Colors.red),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextButton(
+                    onPressed: () async{
+                      // await launch(
+                      //     planulas[i]!.url,
+                      //     forceSafariVC: true,
+                      //     forceWebView: true,
+                      //     enableJavaScript: true,
+                      // );
+                    },
+                    child: LinkPreviewerAad(
+                      link: planulas[i]!.url,
+                      direction: ContentDirection.horizontal,
+                      borderColor: Colors.blue,
+                      borderRadius: 30,
+                      showBody: true,
+                      bodyTextOverflow: TextOverflow.fade,
+                      defaultPlaceholderColor: Colors.blue,
+                    ),
                   ),
                 ),
               );
